@@ -37,6 +37,7 @@ class Life {
 
     next() {
         const {age, event, talent} = this.#property.ageNext();
+        // console.log({age, event, talent})
 
         const talentContent = this.doTalent(talent);
         const eventContent = this.doEvent(this.random(event));
@@ -85,8 +86,11 @@ class Life {
     }
 
     random(events) {
+        // console.log('=======')
+        // console.log(events)
+        // console.log(this.#property)
         events = events.filter(([eventId])=>this.#event.check(eventId, this.#property));
-
+        // console.log(events)
         let totalWeights = 0;
         for(const [, weight] of events)
             totalWeights += weight;

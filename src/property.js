@@ -28,7 +28,78 @@ class Property {
                 event = event?.split(',') || [];
 
             event = event.map(v=>{
-                const value = `${v}`.split('*').map(n=>Number(n));
+                const value = `${v}`.split('*').map(
+
+                  (n, i, a) => {
+                      if(i == 0) {
+                          switch(Number(n)) {
+                              // 不会被截杀
+                              case 10359:
+                                  a[1] = 0;
+                                  break;
+                              // 必定悟出
+                              case 10380:
+                              case 10381:
+                              case 10382:
+                              case 10383:
+                              case 10384:
+                              // case 10385:
+                              case 10386:
+                              case 10387:
+                              case 10388:
+                              case 10389:
+                              case 10390:
+                                  a[1] = 10;
+                                  break;
+                              // 半分突破
+                              // case 10325:
+                              // case 10326:
+                              // case 10327:
+                              // case 10328:
+                              // case 10329:
+                              // case 10330:
+                              // case 10331:
+                              // case 10332:
+                              // case 10333:
+                              // case 10337:
+                              // case 10338:
+                              // case 10339:
+                              // case 10340:
+                              // case 10341:
+                              // case 10342:
+                              // case 10343:
+                              // case 10344:
+                              // case 10345:
+                              // case 10348:
+                              // case 10352:
+                              // case 10353:
+                              // case 10354:
+                              // case 10355:
+                              // case 10356:
+                              // case 10357:
+                              // case 10358:
+                              //     a[1] = 1000;
+                              //     break;
+                              // // 必定双修（容貌10+）
+                              // case 10349:
+                              //     a[1] = 200;
+                              //     break;
+                              // // 你可真是个小机灵鬼（智力10+）
+                              // case 10350:
+                              //     a[1] = 200;
+                              //     break;
+                              // // 挖 宝 人
+                              // case 10495:
+                              //     a[1] = 200;
+                              // // 云 游 四 海
+                              // case 10335:
+                              //     a[1] = 200;
+                              //     break;
+                          }
+                      }
+                      return Number(n);
+                  }
+                );
                 if(value.length==1) value.push(1);
                 return value;
             });
@@ -37,6 +108,10 @@ class Property {
                 talent = talent?.split(',') || [];
 
             talent = talent.map(v=>Number(v));
+            // console.log('======= age =======')
+            // console.log(a)
+            // console.log(event)
+            // console.log(talent)
 
             age[a] = { event, talent };
         }
@@ -108,6 +183,9 @@ class Property {
     }
 
     change(prop, value) {
+        // console.log('change===========')
+        // console.log(prop)
+        // console.log(value)
         if(Array.isArray(value)) {
             for(const v of value)
                 this.change(prop, Number(v));
@@ -116,11 +194,17 @@ class Property {
         switch(prop) {
             case this.TYPES.AGE:
             case this.TYPES.CHR:
+                // this.#data['CHR'] += ~~(Math.random()*1000)
             case this.TYPES.INT:
+                this.#data['INT'] += ~~(Math.random()*1000)
             case this.TYPES.STR:
+                this.#data['STR'] += ~~(Math.random()*1000)
             case this.TYPES.MNY:
+                // this.#data['MNY'] += ~~(Math.random()*1000)
             case this.TYPES.SPR:
+                this.#data['SPR'] += ~~(Math.random()*1000)
             case this.TYPES.LIF:
+                // this.#data['LIF'] += ~~(Math.random()*1000)
                 this.#data[prop] += Number(value);
                 break;
             case this.TYPES.TLT:
